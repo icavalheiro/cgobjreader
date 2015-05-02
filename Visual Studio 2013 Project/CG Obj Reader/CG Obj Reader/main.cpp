@@ -45,6 +45,12 @@ int main(int argc, char** argv)
 			cout << endl;
 			this_thread::sleep_for(chrono::seconds(1));
 
+			if (__reading == "save")
+			{
+				cout << "save not working yet!" << endl;
+				continue;
+			}
+
 			string __fileName = objsDirectory + "/" + __reading + ".obj";
 			if (exists(__fileName) == false)
 			{
@@ -56,7 +62,7 @@ int main(int argc, char** argv)
 			for (int i = 0; i < __file->objects.size(); i++)
 			{
 				ObjRenderer* __renderer = new ObjRenderer(&__file->objects[i], __file);
-				__renderer->name = __fileName;
+				__renderer->name = __fileName + ((i > 0) ? ("(" + to_string(i) + ")") : "");
 				SceneObject* __newSceneObject = new SceneObject();
 				__newSceneObject->renderer = *__renderer;
 				__newSceneObject->position = Vector3(0, 0, 0);
@@ -78,13 +84,15 @@ int main(int argc, char** argv)
 
 								if (i == currentSelected)
 								{
-									GL::Label(sceneObjects[i].position.x, sceneObjects[i].position.y, sceneObjects[i].position.z, 
+									float __lineHeigh = 0.7f;
+
+									GL::Label(sceneObjects[i].position.x, sceneObjects[i].position.y - (__lineHeigh * 0), sceneObjects[i].position.z,
 										sceneObjects[i].renderer.name);
 
-									GL::Label(sceneObjects[i].position.x, sceneObjects[i].position.y -0.7f, sceneObjects[i].position.z, 
+									GL::Label(sceneObjects[i].position.x, sceneObjects[i].position.y - (__lineHeigh * 1), sceneObjects[i].position.z,
 										"position: (" + to_string(sceneObjects[i].position.x) + ", " + to_string(sceneObjects[i].position.y) + ", " + to_string(sceneObjects[i].position.z) + ")");
 
-									GL::Label(sceneObjects[i].position.x, sceneObjects[i].position.y - (0.7f * 2), sceneObjects[i].position.z, 
+									GL::Label(sceneObjects[i].position.x, sceneObjects[i].position.y - (__lineHeigh * 2), sceneObjects[i].position.z,
 										"scale: " + to_string(sceneObjects[i].renderer.scale));
 								}
 							}
@@ -106,14 +114,12 @@ int main(int argc, char** argv)
 								{
 									if (currentSelected < sceneObjects.size())
 										sceneObjects[currentSelected].renderer.scale /= 1.1f;
-									//obj->scale -= obj->scale*0.1f;
 								}
 
 								if (p_key == 'x') // zoom out
 								{
 									if (currentSelected < sceneObjects.size())
 										sceneObjects[currentSelected].renderer.scale *= 1.1f;
-									//obj->scale += obj->scale*0.1f;
 								}
 
                                 if(p_key == 'm') // change draw type mode
@@ -133,7 +139,6 @@ int main(int argc, char** argv)
 								{
 									if (currentSelected < sceneObjects.size())
 										sceneObjects[currentSelected].renderer.SetRandomDrawColor();
-									//obj->SetRandomDrawColor();
 								}
                                     
                                 if(p_key == ',')
