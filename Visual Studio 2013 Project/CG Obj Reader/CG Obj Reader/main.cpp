@@ -25,32 +25,26 @@ inline bool exists (const std::string& name)
 // Programa Principal
 int main(int argc, char** argv)
 {
-	string __path = "D:\\Mac LAN\\Trex.obj";
+	string __path = "D:\\Mac LAN\\chimp.obj";
 
-    cout << "args (" << argc << "): ";
-    for(int i = 0; i < argc; i++)
+    if(argc < 2)
     {
-        cout << "\"" << argv[i] <<"\" ";
+		if (exists(__path) == false)
+		{
+			cout << endl << "No file to load." << endl;
+			return 0;
+		}
     }
-    
-    cout << endl << endl;
-    
-    if(argc < 2 && exists(__path) == false)
-    {
-        cout << "no file sended." << endl;
-        return 0;
-    }
+	else
+		__path = argv[1];
     
     try
     {
-		if (argc >= 2)
-			loadedObjPath = argv[1];
-		else
-			loadedObjPath = __path;
+		loadedObjPath = __path;
         
         if(exists(loadedObjPath) == false)
         {
-            cout << "specified .obj does not exists... closing..." << endl;
+            cout << "Specified .obj does not exists... closing..." << endl;
             return 0;
         }
         

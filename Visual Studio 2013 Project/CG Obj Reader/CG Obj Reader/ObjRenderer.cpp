@@ -8,11 +8,10 @@
 
 #include "ObjRenderer.h"
 
-
 void ObjRenderer::Draw(Point p_where)
 {
-    Object* __object = _object;
-    for(int grupo = 0; grupo < __object->groups.size(); grupo++)
+	Object* __object = _object;
+	for(int grupo = 0; grupo < __object->groups.size(); grupo++)
     {
         Group* __group = &__object->groups[grupo];
         for(int face = 0; face < __group->faces.size(); face++)
@@ -25,7 +24,7 @@ void ObjRenderer::Draw(Point p_where)
                 {
                     Vertex* __toDraw = &__face->vertexes[vertex];
                     Vector3 __point = _parent->points[__toDraw->point];
-                    Vector3 __normal = _parent->normals[__toDraw->normal];
+                    //Vector3 __normal = _parent->normals[__toDraw->normal];
 
 					float __x, __y, __z;
 					__x = p_where.x + (__point.x * scale);
