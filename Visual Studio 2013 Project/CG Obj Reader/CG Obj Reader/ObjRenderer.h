@@ -9,6 +9,7 @@
 #ifndef __GC_exercicio2__ObjRenderer__
 #define __GC_exercicio2__ObjRenderer__
 
+#include <string>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -42,7 +43,9 @@ private:
     
 public:
     float scale;
+	string name;
     
+	ObjRenderer(){} // please dont use this one
     ObjRenderer(Object *p_object, ObjFile *p_parent)
     {
         srand ((int)time(NULL));
@@ -61,5 +64,13 @@ public:
     void SetRandomDrawColor();
 };
 
+class SceneObject
+{
+public:
+	ObjRenderer renderer;
+	Vector3 position;
+
+	void Draw(void);
+};
 
 #endif /* defined(__GC_exercicio2__ObjRenderer__) */

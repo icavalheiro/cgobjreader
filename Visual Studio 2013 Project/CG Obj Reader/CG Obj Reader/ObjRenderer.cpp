@@ -85,3 +85,8 @@ void ObjRenderer::SetRandomDrawColor()
     this->_drawColor->g = __g;
     this->_drawColor->b = __b;
 }
+
+void SceneObject::Draw()
+{
+	this->renderer.Draw(Point::Create(this->position.x, this->position.y, this->position.z));
+}

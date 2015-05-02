@@ -2,17 +2,20 @@
 #include <string>
 #include <math.h>
 #include <fstream>
+#include <thread>
+#include <chrono>
 
 #include "ObjReader.h"
 #include "GL.h"
 #include "ObjRenderer.h"
 
 
-ObjRenderer* obj;
 double contador = 0;
 float cameraDistance = 35;
 bool autoRotate = true;
-string loadedObjPath;
+string objsDirectory;
+vector<SceneObject> sceneObjects;
+int currentSelected = 0;
 
 inline bool exists (const std::string& name) 
 {
@@ -25,109 +28,181 @@ inline bool exists (const std::string& name)
 // Programa Principal
 int main(int argc, char** argv)
 {
-	string __path = "D:\\Mac LAN\\chimp.obj";
+	//define a handler for console input
+	auto __consoleHandler = []()
+	{
+		cout << "Set the working directory (where the obj files are): ";
+		getline(cin, objsDirectory);
+		cout << endl;
 
-    if(argc < 2)
-    {
-		if (exists(__path) == false)
+		this_thread::sleep_for(chrono::seconds(1));
+
+		string __reading = "";
+		while (__reading != "q")
 		{
-			cout << endl << "No file to load." << endl;
-			return 0;
+			cout << "> ";
+			getline(cin, __reading);
+			cout << endl;
+			this_thread::sleep_for(chrono::seconds(1));
+
+			string __fileName = objsDirectory + "/" + __reading + ".obj";
+			if (exists(__fileName) == false)
+			{
+				cout << "Cannot load file: " + __fileName << endl;
+				continue;
+			}
+
+			ObjFile* __file = (new ObjReader())->ReadFile(__fileName);
+			for (int i = 0; i < __file->objects.size(); i++)
+			{
+				ObjRenderer* __renderer = new ObjRenderer(&__file->objects[i], __file);
+				__renderer->name = __fileName;
+				SceneObject* __newSceneObject = new SceneObject();
+				__newSceneObject->renderer = *__renderer;
+				__newSceneObject->position = Vector3(0, 0, 0);
+
+				sceneObjects.push_back(*__newSceneObject);
+			}
 		}
-    }
-	else
-		__path = argv[1];
-    
-    try
-    {
-		loadedObjPath = __path;
-        
-        if(exists(loadedObjPath) == false)
-        {
-            cout << "Specified .obj does not exists... closing..." << endl;
-            return 0;
-        }
-        
-        ObjFile* fileToDraw = (new ObjReader())->ReadFile(loadedObjPath);
-    
-        obj = new ObjRenderer(&fileToDraw->objects[0], fileToDraw);
-    
-        GL::Init(&argc, argv);
-        GL::SetDrawCallback([]()
+		exit(0);
+	};
+
+	//pass important variables and callbacks to the GL class
+    GL::Init(&argc, argv);
+    GL::SetDrawCallback([]()
+                        {
+                            //draw loaded obj
+							for (int i = 0; i < sceneObjects.size(); i++)
+							{
+								sceneObjects[i].Draw();
+
+								if (i == currentSelected)
+								{
+									GL::Label(sceneObjects[i].position.x, sceneObjects[i].position.y, sceneObjects[i].position.z, 
+										sceneObjects[i].renderer.name);
+
+									GL::Label(sceneObjects[i].position.x, sceneObjects[i].position.y -0.7f, sceneObjects[i].position.z, 
+										"position: (" + to_string(sceneObjects[i].position.x) + ", " + to_string(sceneObjects[i].position.y) + ", " + to_string(sceneObjects[i].position.z) + ")");
+
+									GL::Label(sceneObjects[i].position.x, sceneObjects[i].position.y - (0.7f * 2), sceneObjects[i].position.z, 
+										"scale: " + to_string(sceneObjects[i].renderer.scale));
+								}
+							}
+
+                            
+                            //rotate camera
+                            if(autoRotate)
                             {
-                                //draw loaded obj
-                                obj->Draw(Point::Create(0, 0, 0));
-                            
-                                //draw label
-                                GL::Label(2, 0, loadedObjPath);
-                                GL::Label(2, -0.7f, "camera position: (" + to_string(GL::mainCamera.position.x) + ", " + to_string(GL::mainCamera.position.y) + ", " + to_string(GL::mainCamera.position.z) + ")");
-                                GL::Label(2, -1.4f, "scale: " + to_string(obj->scale));
-                                
-                            
-                                //rotate camera
-                                if(autoRotate)
+                                contador += GL::deltaTime;
+                                GL::mainCamera.position.x = cos(contador) * cameraDistance;
+                                GL::mainCamera.position.z = sin(contador) * cameraDistance;
+                            }
+                        });
+    
+    
+    GL::SetKeyboardCallback([](unsigned char p_key, int p_x, int p_y)
+                            {
+								if (p_key == 'z') // zoom in
+								{
+									if (currentSelected < sceneObjects.size())
+										sceneObjects[currentSelected].renderer.scale /= 1.1f;
+									//obj->scale -= obj->scale*0.1f;
+								}
+
+								if (p_key == 'x') // zoom out
+								{
+									if (currentSelected < sceneObjects.size())
+										sceneObjects[currentSelected].renderer.scale *= 1.1f;
+									//obj->scale += obj->scale*0.1f;
+								}
+
+                                if(p_key == 'm') // change draw type mode
                                 {
-                                    contador += GL::deltaTime;
-                                    GL::mainCamera.position.x = cos(contador) * cameraDistance;
-                                    GL::mainCamera.position.z = sin(contador) * cameraDistance;
+									if (currentSelected < sceneObjects.size())
+									{
+										if (sceneObjects[currentSelected].renderer.GetCurrentDrawType() == GL_LINE_LOOP)
+											sceneObjects[currentSelected].renderer.SetDrawType(GL_POLYGON);
+										else if (sceneObjects[currentSelected].renderer.GetCurrentDrawType() == GL_POLYGON)
+											sceneObjects[currentSelected].renderer.SetDrawType(-1);
+										else
+											sceneObjects[currentSelected].renderer.SetDrawType(GL_LINE_LOOP);
+									}
                                 }
-                            });
-    
-    
-        GL::SetKeyboardCallback([](unsigned char p_key, int p_x, int p_y)
+                                    
+								if (p_key == 'c') //change draw color
+								{
+									if (currentSelected < sceneObjects.size())
+										sceneObjects[currentSelected].renderer.SetRandomDrawColor();
+									//obj->SetRandomDrawColor();
+								}
+                                    
+                                if(p_key == ',')
                                 {
-                                    if(p_key == 'z') // zoom in
-                                        obj->scale -= obj->scale*0.1f;
+                                    autoRotate = false;
+                                    contador -= 0.1f;
+                                }
+                                    
+                                if(p_key == '.')
+                                {
+                                    autoRotate = false;
+                                    contador += 0.1f;
+                                }
+                                    
+                                if(p_key == ' ')
+                                    autoRotate = true;
+
+								if (p_key == '\'')
+								{
+									currentSelected++;
+									if (currentSelected >= sceneObjects.size())
+										currentSelected = 0;
+								}
+
+								if (p_key == 'i')
+								{
+									if (currentSelected < sceneObjects.size())
+										sceneObjects[currentSelected].position.x += 0.3f;
+								}
+
+								if (p_key == 'I')
+								{
+									if (currentSelected < sceneObjects.size())
+										sceneObjects[currentSelected].position.x -= 0.3f;
+								}
+
+								if (p_key == 'o')
+								{
+									if (currentSelected < sceneObjects.size())
+										sceneObjects[currentSelected].position.y += 0.3f;
+								}
+
+								if (p_key == 'O')
+								{
+									if (currentSelected < sceneObjects.size())
+										sceneObjects[currentSelected].position.y -= 0.3f;
+								}
+
+								if (p_key == 'p')
+								{
+									if (currentSelected < sceneObjects.size())
+										sceneObjects[currentSelected].position.z += 0.3f;
+								}
+
+								if (p_key == 'P')
+								{
+									if (currentSelected < sceneObjects.size())
+										sceneObjects[currentSelected].position.z -= 0.3f;
+								}
+                                    
+                                GL::mainCamera.position.x = cos(contador) * cameraDistance;
+                                GL::mainCamera.position.z = sin(contador) * cameraDistance;
                                 
-                                    if(p_key == 'x') // zoom out
-                                        obj->scale += obj->scale*0.1f;
-                                    
-                                    if(p_key == 'm') // change draw type mode
-                                    {
-                                        if(obj->GetCurrentDrawType() == GL_LINE_LOOP)
-                                            obj->SetDrawType(GL_POLYGON);
-                                        else if(obj->GetCurrentDrawType() == GL_POLYGON)
-                                            obj->SetDrawType(-1);//-1 represent both
-                                        else
-                                            obj->SetDrawType(GL_LINE_LOOP);
-                                    }
-                                    
-                                    if(p_key == 'c') //change draw color
-                                        obj->SetRandomDrawColor();
-                                    
-                                    if(p_key == ',')
-                                    {
-                                        autoRotate = false;
-                                        contador -= 0.1f;
-                                    }
-                                    
-                                    if(p_key == '.')
-                                    {
-                                        autoRotate = false;
-                                        contador += 0.1f;
-                                    }
-                                    
-                                    if(p_key == ' ')
-                                        autoRotate = true;
-                                    
-                                    GL::mainCamera.position.x = cos(contador) * cameraDistance;
-                                    GL::mainCamera.position.z = sin(contador) * cameraDistance;
-                                
-                                    GL::mainCamera.Update();
-                                });
-    
-        GL::SetMouseCallback([] (int p_button, int p_state, int p_x, int p_y)
-                             {
-                             
-                             });
-        
-        GL::StartLoop();
-    }
-    catch(exception p_exception)
-    {
-        cout << "Something went wrong: " << p_exception.what() << endl;
-        return 0;
-    }
+                                GL::mainCamera.Update();
+                            });
+
+	//start the GL loop, showing the window and starting the console handler in a separate thread
+	thread __consoleThread(__consoleHandler);
+	GL::StartLoop();
 }
 
 

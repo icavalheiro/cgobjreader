@@ -1,6 +1,32 @@
-﻿Build started 01/05/2015 16:23:31.
+﻿Build started 02/05/2015 00:47:37.
      1>Project "C:\Users\Ivan\Documents\GitHub\cgobjreader\Visual Studio 2013 Project\CG Obj Reader\CG Obj Reader\CG Obj Reader.vcxproj" on node 2 (Build target(s)).
-     1>Link:
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I../ /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt GL.cpp ObjRenderer.cpp main.cpp
+         main.cpp
+     1>c:\users\ivan\documents\github\cgobjreader\visual studio 2013 project\cg obj reader\cg obj reader\main.cpp(56): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ivan\documents\github\cgobjreader\visual studio 2013 project\cg obj reader\cg obj reader\main.cpp(75): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ivan\documents\github\cgobjreader\visual studio 2013 project\cg obj reader\cg obj reader\main.cpp(107): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ivan\documents\github\cgobjreader\visual studio 2013 project\cg obj reader\cg obj reader\main.cpp(114): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ivan\documents\github\cgobjreader\visual studio 2013 project\cg obj reader\cg obj reader\main.cpp(121): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ivan\documents\github\cgobjreader\visual studio 2013 project\cg obj reader\cg obj reader\main.cpp(134): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ivan\documents\github\cgobjreader\visual studio 2013 project\cg obj reader\cg obj reader\main.cpp(157): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\ivan\documents\github\cgobjreader\visual studio 2013 project\cg obj reader\cg obj reader\main.cpp(163): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ivan\documents\github\cgobjreader\visual studio 2013 project\cg obj reader\cg obj reader\main.cpp(169): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ivan\documents\github\cgobjreader\visual studio 2013 project\cg obj reader\cg obj reader\main.cpp(175): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ivan\documents\github\cgobjreader\visual studio 2013 project\cg obj reader\cg obj reader\main.cpp(181): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ivan\documents\github\cgobjreader\visual studio 2013 project\cg obj reader\cg obj reader\main.cpp(187): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ivan\documents\github\cgobjreader\visual studio 2013 project\cg obj reader\cg obj reader\main.cpp(193): warning C4018: '<' : signed/unsigned mismatch
+         ObjRenderer.cpp
+     1>c:\users\ivan\documents\github\cgobjreader\visual studio 2013 project\cg obj reader\cg obj reader\objrenderer.cpp(14): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ivan\documents\github\cgobjreader\visual studio 2013 project\cg obj reader\cg obj reader\objrenderer.cpp(17): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ivan\documents\github\cgobjreader\visual studio 2013 project\cg obj reader\cg obj reader\objrenderer.cpp(23): warning C4018: '<' : signed/unsigned mismatch
+         GL.cpp
+     1>c:\users\ivan\documents\github\cgobjreader\visual studio 2013 project\cg obj reader\cg obj reader\gl.cpp(58): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ivan\documents\github\cgobjreader\visual studio 2013 project\cg obj reader\cg obj reader\gl.cpp(64): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ivan\documents\github\cgobjreader\visual studio 2013 project\cg obj reader\cg obj reader\gl.cpp(74): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ivan\documents\github\cgobjreader\visual studio 2013 project\cg obj reader\cg obj reader\gl.cpp(149): warning C4018: '<' : signed/unsigned mismatch
+         Generating Code...
+       Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Ivan\Documents\GitHub\cgobjreader\Visual Studio 2013 Project\CG Obj Reader\Debug\CG Obj Reader.exe" /INCREMENTAL /NOLOGO /LIBPATH:..\GLUT\lib Glut32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Ivan\Documents\GitHub\cgobjreader\Visual Studio 2013 Project\CG Obj Reader\Debug\CG Obj Reader.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Ivan\Documents\GitHub\cgobjreader\Visual Studio 2013 Project\CG Obj Reader\Debug\CG Obj Reader.lib" /MACHINE:X86 Debug\GL.obj
          Debug\main.obj
          Debug\ObjReader.obj
@@ -10,4 +36,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.32
+Time Elapsed 00:00:03.46

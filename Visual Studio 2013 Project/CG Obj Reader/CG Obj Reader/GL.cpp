@@ -143,9 +143,9 @@ void GL::StartLoop(void)
     glutMainLoop();
 }
 
-void GL::Label(float p_x, float p_y, string p_text)
+void GL::Label(float p_x, float p_y, float p_z, string p_text)
 {
-    glRasterPos2f(p_x, p_y);
+    glRasterPos3f(p_x, p_y, p_z);
     for(int i = 0; i < p_text.size(); i++)
         glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_10, (int)p_text[i]);
 }

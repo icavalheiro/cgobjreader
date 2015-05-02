@@ -14,9 +14,7 @@
 #include <GLUT\GL\glut.h>
 #include <vector>
 
-//#include <GLKit/GLKit.h>
-
-#define OPENGL_WINDOW_NAME "OpenGL Window"
+#define OPENGL_WINDOW_NAME "OBJ Reader"
 #define SHOW_AXIS true
 
 using namespace std;
@@ -85,7 +83,7 @@ public:
     static void Init(int *p_argc, char** p_argv);
     static void StartLoop(void);
     
-    static void Label(float p_x, float p_y, string p_text);
+    static void Label(float p_x, float p_y, float p_z, string p_text);
 };
 
 
