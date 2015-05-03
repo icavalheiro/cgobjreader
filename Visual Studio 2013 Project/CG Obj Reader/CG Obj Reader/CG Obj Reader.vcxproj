@@ -14,12 +14,14 @@
     <ClInclude Include="GL.h" />
     <ClInclude Include="ObjReader.h" />
     <ClInclude Include="ObjRenderer.h" />
+    <ClInclude Include="ObjWriter.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GL.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ObjReader.cpp" />
     <ClCompile Include="ObjRenderer.cpp" />
+    <ClCompile Include="ObjWriter.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{578DDDC0-D041-4FC1-8DDB-94EE41BD1512}</ProjectGuid>

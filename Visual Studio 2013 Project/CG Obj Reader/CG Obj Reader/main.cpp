@@ -8,6 +8,7 @@
 #include "ObjReader.h"
 #include "GL.h"
 #include "ObjRenderer.h"
+#include "ObjWriter.h"
 
 
 double contador = 0;
@@ -47,7 +48,9 @@ int main(int argc, char** argv)
 
 			if (__reading == "save")
 			{
-				cout << "save not working yet!" << endl;
+				string __saveLocation = objsDirectory + "/saved_scene.obj";
+				ObjWriter::WriteToFile(sceneObjects, __saveLocation);
+				cout << "File saved: " << __saveLocation << endl;
 				continue;
 			}
 

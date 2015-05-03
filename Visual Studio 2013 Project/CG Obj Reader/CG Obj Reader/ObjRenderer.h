@@ -62,6 +62,8 @@ public:
     int GetCurrentDrawType();
 
     void SetRandomDrawColor();
+
+	ObjFile* GetObjFile(void);
 };
 
 class SceneObject

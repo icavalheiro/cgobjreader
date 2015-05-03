@@ -65,6 +65,11 @@ void ObjRenderer::Draw(Point p_where)
     glColor3f(1, 1, 1);
 }
 
+ObjFile* ObjRenderer::GetObjFile()
+{
+	return this->_parent;
+}
+
 void ObjRenderer::SetDrawType(int p_glutDrawType)
 {
     this->_drawType = p_glutDrawType;
