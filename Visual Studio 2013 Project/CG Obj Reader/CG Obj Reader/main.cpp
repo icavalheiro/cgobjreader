@@ -97,6 +97,9 @@ int main(int argc, char** argv)
 
 									GL::Label(sceneObjects[i].position.x, sceneObjects[i].position.y - (__lineHeigh * 2), sceneObjects[i].position.z,
 										"scale: " + to_string(sceneObjects[i].renderer.scale));
+
+									GL::Label(sceneObjects[i].position.x, sceneObjects[i].position.y - (__lineHeigh * 3), sceneObjects[i].position.z,
+										"faces: " + to_string(sceneObjects[i].renderer.faceCount));
 								}
 							}
 

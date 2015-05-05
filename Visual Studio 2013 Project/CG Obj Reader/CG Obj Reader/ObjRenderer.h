@@ -44,6 +44,7 @@ private:
 public:
     float scale;
 	string name;
+	int faceCount;
     
 	ObjRenderer(){} // please dont use this one
     ObjRenderer(Object *p_object, ObjFile *p_parent)
@@ -54,6 +55,9 @@ public:
         scale = 1;
         _drawType = GL_LINE_LOOP;
         _drawColor = new Color(1,1,1,1);
+		faceCount = 0;
+		for (int i = 0; i < p_object->groups.size(); i++)
+			faceCount += p_object->groups[i].faces.size();
     }
     
     void Draw(Point p_where);
