@@ -67,13 +67,7 @@ ObjFile* ObjReader::ReadFile(string p_fileName)
                     __currentObject->groups.push_back(*__currentGroup);
                     __currentGroup = NULL;
                 }
-                
-                if(__currentObject != NULL)
-                {
-                    __toReturn->objects.push_back(*__currentObject);
-                    __currentObject = NULL;
-                }
-                
+
                 continue;
             }
             
@@ -233,7 +227,7 @@ ObjFile* ObjReader::ReadFile(string p_fileName)
             }
             
             //group
-            if(__lineSplit[0] == "g")
+			if (__lineSplit[0] == "g")
             {
                 if(SHOW_OBJ_READER_DEBUG)
                     cout << "new group" << endl;
