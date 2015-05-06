@@ -27,7 +27,7 @@ inline bool exists (const std::string& name)
 }
 
 // Programa Principal
-int main2(int argc, char** argv)
+int main(int argc, char** argv)
 {
 	//define a handler for console input
 	auto __consoleHandler = []()
@@ -135,7 +135,7 @@ int main2(int argc, char** argv)
 										if (sceneObjects[currentSelected].renderer.GetCurrentDrawType() == GL_LINE_LOOP)
 											sceneObjects[currentSelected].renderer.SetDrawType(GL_POLYGON);
 										else if (sceneObjects[currentSelected].renderer.GetCurrentDrawType() == GL_POLYGON)
-											sceneObjects[currentSelected].renderer.SetDrawType(-1);
+											sceneObjects[currentSelected].renderer.SetDrawType(POLYGON_WITH_BORDERS);
 										else
 											sceneObjects[currentSelected].renderer.SetDrawType(GL_LINE_LOOP);
 									}

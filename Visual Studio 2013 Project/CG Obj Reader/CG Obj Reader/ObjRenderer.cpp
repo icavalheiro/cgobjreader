@@ -39,13 +39,14 @@ void ObjRenderer::Draw(Point p_where, Vector3 p_rotation)
 			glPushMatrix();
 			glTranslatef(p_where.x, p_where.y, p_where.z);
 			glScalef(scale, scale, scale);
+
 			glRotatef(p_rotation.x, 1, 0, 0);
 			glRotatef(p_rotation.y, 0, 1, 0);
 			glRotatef(p_rotation.z, 0, 0, 1);
-            if(this->_drawType == -1)
+
+			if (this->_drawType == POLYGON_WITH_BORDERS)
             {
                 glBegin(GL_POLYGON);
-				glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
                 glColor3f(this->_drawColor->r, this->_drawColor->g, this->_drawColor->b);
                 __drawPointsAction();
                 glEnd();
@@ -59,7 +60,6 @@ void ObjRenderer::Draw(Point p_where, Vector3 p_rotation)
             {
                 glColor3f(this->_drawColor->r, this->_drawColor->g, this->_drawColor->b);
                 glBegin(this->_drawType);
-				glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
                 __drawPointsAction();
                 glEnd();
             }
