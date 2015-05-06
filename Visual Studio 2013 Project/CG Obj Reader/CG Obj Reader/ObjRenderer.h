@@ -60,7 +60,7 @@ public:
 			faceCount += p_object->groups[i].faces.size();
     }
     
-    void Draw(Point p_where);
+    void Draw(Point p_where, Vector3 p_rotation);
     
     void SetDrawType(int p_glutDrawType);
     int GetCurrentDrawType();
@@ -75,6 +75,7 @@ class SceneObject
 public:
 	ObjRenderer renderer;
 	Vector3 position;
+	Vector3 eulerAngles;
 
 	void Draw(void);
 };

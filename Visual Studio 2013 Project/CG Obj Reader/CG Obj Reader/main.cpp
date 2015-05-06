@@ -27,7 +27,7 @@ inline bool exists (const std::string& name)
 }
 
 // Programa Principal
-int main(int argc, char** argv)
+int main2(int argc, char** argv)
 {
 	//define a handler for console input
 	auto __consoleHandler = []()
@@ -203,6 +203,42 @@ int main(int argc, char** argv)
 								{
 									if (currentSelected < sceneObjects.size())
 										sceneObjects[currentSelected].position.z -= 0.3f;
+								}
+
+								if (p_key == 'j')
+								{
+									if (currentSelected < sceneObjects.size())
+										sceneObjects[currentSelected].eulerAngles.x += 10;
+								}
+
+								if (p_key == 'J')
+								{
+									if (currentSelected < sceneObjects.size())
+										sceneObjects[currentSelected].eulerAngles.x -= 10;
+								}
+
+								if (p_key == 'k')
+								{
+									if (currentSelected < sceneObjects.size())
+										sceneObjects[currentSelected].eulerAngles.y += 10;
+								}
+
+								if (p_key == 'K')
+								{
+									if (currentSelected < sceneObjects.size())
+										sceneObjects[currentSelected].eulerAngles.y -= 10;
+								}
+
+								if (p_key == 'l')
+								{
+									if (currentSelected < sceneObjects.size())
+										sceneObjects[currentSelected].eulerAngles.z += 10;
+								}
+
+								if (p_key == 'L')
+								{
+									if (currentSelected < sceneObjects.size())
+										sceneObjects[currentSelected].eulerAngles.z -= 10;
 								}
                                     
                                 GL::mainCamera.position.x = cos(contador) * cameraDistance;

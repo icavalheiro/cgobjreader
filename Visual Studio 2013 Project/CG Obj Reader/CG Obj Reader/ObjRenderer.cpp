@@ -8,7 +8,7 @@
 
 #include "ObjRenderer.h"
 
-void ObjRenderer::Draw(Point p_where)
+void ObjRenderer::Draw(Point p_where, Vector3 p_rotation)
 {
 	Object* __object = _object;
 	for(int grupo = 0; grupo < __object->groups.size(); grupo++)
@@ -24,18 +24,24 @@ void ObjRenderer::Draw(Point p_where)
                 {
                     Vertex* __toDraw = &__face->vertexes[vertex];
                     Vector3 __point = _parent->points[__toDraw->point];
-                    //Vector3 __normal = _parent->normals[__toDraw->normal];
+                    Vector3 __normal = _parent->normals[__toDraw->normal];
 
 					float __x, __y, __z;
-					__x = p_where.x + (__point.x * scale);
-					__y = p_where.y + (__point.y * scale);
-					__z = p_where.z + (__point.z * scale);
+					__x =  (__point.x);
+					__y =  (__point.y);
+					__z = (__point.z);
 
 					glVertex3f(__x, __y, __z);
-                    //glNormal3f(__normal.x, __normal.y, __normal.z);
+                    glNormal3f(__normal.x, __normal.y, __normal.z);
                 }
             };
             
+			glPushMatrix();
+			glTranslatef(p_where.x, p_where.y, p_where.z);
+			glScalef(scale, scale, scale);
+			glRotatef(p_rotation.x, 1, 0, 0);
+			glRotatef(p_rotation.y, 0, 1, 0);
+			glRotatef(p_rotation.z, 0, 0, 1);
             if(this->_drawType == -1)
             {
                 glBegin(GL_POLYGON);
@@ -57,8 +63,7 @@ void ObjRenderer::Draw(Point p_where)
                 __drawPointsAction();
                 glEnd();
             }
-
-			glBegin(GL_LINE);
+			glPopMatrix();
         }
     }
     
@@ -93,5 +98,5 @@ void ObjRenderer::SetRandomDrawColor()
 
 void SceneObject::Draw()
 {
-	this->renderer.Draw(Point::Create(this->position.x, this->position.y, this->position.z));
+	this->renderer.Draw(Point::Create(this->position.x, this->position.y, this->position.z), this->eulerAngles);
 }
