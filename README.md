@@ -13,6 +13,6 @@ Commands:
 - [i] [I] [o] [O] [p] [P] = move object
 - [,] [.] = stop auto rotate camera and rotate it to right or left
 - [space bar] = enable auto rotate camera
-- [´] (single quote) = change current selected obj
+- ['] = (single quote) change current selected obj
 - [c] = change OBJ color to a random one
 - [m] = change how the OBJ is drawn (wireframe, polygons or both)
