@@ -17,6 +17,7 @@
 #define OPENGL_WINDOW_NAME "OBJ Reader"
 #define SHOW_AXIS true
 #define POLYGON_WITH_BORDERS -1
+#define POLYGON_WITH_SHADER -2
 
 using namespace std;
 

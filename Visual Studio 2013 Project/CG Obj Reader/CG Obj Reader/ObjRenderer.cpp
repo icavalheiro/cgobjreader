@@ -56,7 +56,20 @@ void ObjRenderer::Draw(Point p_where, Vector3 p_rotation)
                 __drawPointsAction();
                 glEnd();
             }
-            else
+			else if (this->_drawType == POLYGON_WITH_SHADER)
+			{
+				GLfloat plano_difusa[] = { 0.5, 0.5, 0.0, 1.0 };
+				GLfloat plano_especular[] = { 1.0, 1.0, 1.0, 1.0 };
+				GLfloat plano_brilho[] = { 50.0 };
+
+				glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, plano_difusa);
+				glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, plano_especular);
+				glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, plano_brilho);
+				glBegin(GL_POLYGON);
+				__drawPointsAction();
+				glEnd();
+			}
+			else
             {
                 glColor3f(this->_drawColor->r, this->_drawColor->g, this->_drawColor->b);
                 glBegin(this->_drawType);

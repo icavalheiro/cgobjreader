@@ -69,7 +69,7 @@ void GL::DrawCallback(void)
 {
     GL::Update();
     
-    glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     for(int i = 0; i < GL::_drawCallbacks.size(); i++)
         GL::_drawCallbacks[i]();
@@ -116,6 +116,9 @@ void GL::Init(int *p_argc, char **p_argv)
 {
     glutInit(p_argc, p_argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+	glEnable(GL_LIGHTING);
+	glShadeModel(GL_SMOOTH);
+	glDepthMask(GL_TRUE);
 	glEnable(GL_DEPTH_TEST);//
 	glShadeModel(GL_FLAT);//
 	glDisable(GL_CULL_FACE);//
