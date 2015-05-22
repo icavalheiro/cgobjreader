@@ -18,6 +18,7 @@
 #define SHOW_AXIS true
 #define POLYGON_WITH_BORDERS -1
 #define POLYGON_WITH_SHADER -2
+#define POLYGON_WITH_SHADER_EMIT -3
 
 using namespace std;
 

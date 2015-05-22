@@ -100,6 +100,22 @@ int main(int argc, char** argv)
 
 									GL::Label(sceneObjects[i].position.x, sceneObjects[i].position.y - (__lineHeigh * 3), sceneObjects[i].position.z,
 										"faces: " + to_string(sceneObjects[i].renderer.faceCount));
+
+									int __drawMode = sceneObjects[i].renderer.GetCurrentDrawType();
+									string __drawModeName = "";
+									if (__drawMode == GL_LINE_LOOP)
+										__drawModeName = "GL_LINE_LOOP";
+									else if (__drawMode == GL_POLYGON)
+										__drawModeName = "GL_POLYGON";
+									else if (__drawMode == POLYGON_WITH_BORDERS)
+										__drawModeName = "POLYGON_WITH_BORDERS";
+									else if (__drawMode == POLYGON_WITH_SHADER)
+										__drawModeName = "POLYGON_WITH_SHADER";
+									else
+										__drawModeName = "POLYGON_WITH_SHADER_EMIT";
+
+									GL::Label(sceneObjects[i].position.x, sceneObjects[i].position.y - (__lineHeigh * 4), sceneObjects[i].position.z,
+										"drawMode: " + __drawModeName);
 								}
 							}
 
@@ -138,6 +154,8 @@ int main(int argc, char** argv)
 											sceneObjects[currentSelected].renderer.SetDrawType(POLYGON_WITH_BORDERS);
 										else if (sceneObjects[currentSelected].renderer.GetCurrentDrawType() == POLYGON_WITH_BORDERS)
 											sceneObjects[currentSelected].renderer.SetDrawType(POLYGON_WITH_SHADER);
+										else if (sceneObjects[currentSelected].renderer.GetCurrentDrawType() == POLYGON_WITH_SHADER)
+											sceneObjects[currentSelected].renderer.SetDrawType(POLYGON_WITH_SHADER_EMIT);
 										else
 											sceneObjects[currentSelected].renderer.SetDrawType(GL_LINE_LOOP);
 									}

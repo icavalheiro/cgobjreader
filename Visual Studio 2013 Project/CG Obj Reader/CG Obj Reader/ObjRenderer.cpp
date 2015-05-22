@@ -69,6 +69,15 @@ void ObjRenderer::Draw(Point p_where, Vector3 p_rotation)
 				__drawPointsAction();
 				glEnd();
 			}
+			else if (this->_drawType == POLYGON_WITH_SHADER_EMIT)
+			{
+				GLfloat cor_luz0[] = { 1.0, 1.0, 1.0, 1.0 };
+
+				glMaterialfv(GL_FRONT, GL_EMISSION, cor_luz0);
+				glBegin(GL_POLYGON);
+				__drawPointsAction();
+				glEnd();
+			}
 			else
             {
                 glColor3f(this->_drawColor->r, this->_drawColor->g, this->_drawColor->b);
