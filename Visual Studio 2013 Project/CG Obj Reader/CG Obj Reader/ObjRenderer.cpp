@@ -58,6 +58,7 @@ void ObjRenderer::Draw(Point p_where, Vector3 p_rotation)
             }
 			else if (this->_drawType == POLYGON_WITH_SHADER)
 			{
+				glEnable(GL_LIGHTING);
 				GLfloat plano_difusa[] = { 0.5, 0.5, 0.0, 1.0 };
 				GLfloat plano_especular[] = { 1.0, 1.0, 1.0, 1.0 };
 				GLfloat plano_brilho[] = { 50.0 };
@@ -68,15 +69,18 @@ void ObjRenderer::Draw(Point p_where, Vector3 p_rotation)
 				glBegin(GL_POLYGON);
 				__drawPointsAction();
 				glEnd();
+				glDisable(GL_LIGHTING);
 			}
 			else if (this->_drawType == POLYGON_WITH_SHADER_EMIT)
-			{
+			{//ta bugando tudo
+				glEnable(GL_LIGHTING);
 				GLfloat cor_luz0[] = { 1.0, 1.0, 1.0, 1.0 };
 
 				glMaterialfv(GL_FRONT, GL_EMISSION, cor_luz0);
 				glBegin(GL_POLYGON);
 				__drawPointsAction();
 				glEnd();
+				glDisable(GL_LIGHTING);
 			}
 			else
             {

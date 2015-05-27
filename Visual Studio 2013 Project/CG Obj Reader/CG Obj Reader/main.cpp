@@ -155,8 +155,8 @@ int main(int argc, char** argv)
 										else if (sceneObjects[currentSelected].renderer.GetCurrentDrawType() == POLYGON_WITH_BORDERS)
 											sceneObjects[currentSelected].renderer.SetDrawType(POLYGON_WITH_SHADER);
 										else if (sceneObjects[currentSelected].renderer.GetCurrentDrawType() == POLYGON_WITH_SHADER)
-											sceneObjects[currentSelected].renderer.SetDrawType(POLYGON_WITH_SHADER_EMIT);
-										else
+											//sceneObjects[currentSelected].renderer.SetDrawType(POLYGON_WITH_SHADER_EMIT);
+										//else
 											sceneObjects[currentSelected].renderer.SetDrawType(GL_LINE_LOOP);
 									}
                                 }
