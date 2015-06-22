@@ -28,8 +28,35 @@ ObjFile* ObjReader::ReadFile(string p_fileName)
     string __line;
     ObjFile* __toReturn = new ObjFile();
     Object* __currentObject = NULL;
-    Group* __currentGroup = NULL;
-    
+	Group* __currentGroup = NULL;
+
+	//read texure
+	{
+		ifstream __testForTexture(p_fileName + ".jpg");
+		if (__testForTexture.is_open() == true)
+		{
+			__testForTexture.close();
+
+			//read texture
+
+			//http://www.lonesock.net/soil.html
+			//https://open.gl/textures
+			GLuint __texture = SOIL_load_OGL_texture(
+				(p_fileName + ".jpg").c_str(), 
+				SOIL_LOAD_AUTO, 
+				SOIL_CREATE_NEW_ID, 
+				SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
+
+			__toReturn->texture = &__texture;
+		}
+		else
+		{
+			__testForTexture.close();
+		}
+	}
+
+
+	//read .obj
     if(__fileStream.is_open())
     {
         vector<Vector3> __points;

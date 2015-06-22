@@ -82,6 +82,10 @@ void ObjRenderer::Draw(Point p_where, Vector3 p_rotation)
 				glEnd();
 				glDisable(GL_LIGHTING);
 			}
+			else if (this->_drawType == TEXTURED)
+			{
+
+			}
 			else
             {
                 glColor3f(this->_drawColor->r, this->_drawColor->g, this->_drawColor->b);

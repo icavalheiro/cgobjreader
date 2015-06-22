@@ -111,8 +111,10 @@ int main(int argc, char** argv)
 										__drawModeName = "POLYGON_WITH_BORDERS";
 									else if (__drawMode == POLYGON_WITH_SHADER)
 										__drawModeName = "POLYGON_WITH_SHADER";
-									else
+									else if (__drawMode == POLYGON_WITH_SHADER_EMIT)
 										__drawModeName = "POLYGON_WITH_SHADER_EMIT";
+									else
+										__drawModeName = "TEXTURED";
 
 									GL::Label(sceneObjects[i].position.x, sceneObjects[i].position.y - (__lineHeigh * 4), sceneObjects[i].position.z,
 										"drawMode: " + __drawModeName);
@@ -155,8 +157,8 @@ int main(int argc, char** argv)
 										else if (sceneObjects[currentSelected].renderer.GetCurrentDrawType() == POLYGON_WITH_BORDERS)
 											sceneObjects[currentSelected].renderer.SetDrawType(POLYGON_WITH_SHADER);
 										else if (sceneObjects[currentSelected].renderer.GetCurrentDrawType() == POLYGON_WITH_SHADER)
-											//sceneObjects[currentSelected].renderer.SetDrawType(POLYGON_WITH_SHADER_EMIT);
-										//else
+											sceneObjects[currentSelected].renderer.SetDrawType(TEXTURED);
+										else if (sceneObjects[currentSelected].renderer.GetCurrentDrawType() == TEXTURED)
 											sceneObjects[currentSelected].renderer.SetDrawType(GL_LINE_LOOP);
 									}
                                 }

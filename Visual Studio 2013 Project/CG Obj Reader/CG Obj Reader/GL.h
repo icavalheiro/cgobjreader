@@ -19,6 +19,7 @@
 #define POLYGON_WITH_BORDERS -1
 #define POLYGON_WITH_SHADER -2
 #define POLYGON_WITH_SHADER_EMIT -3
+#define TEXTURED -4
 
 using namespace std;
 

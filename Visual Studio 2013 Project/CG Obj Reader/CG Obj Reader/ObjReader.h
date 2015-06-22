@@ -18,6 +18,8 @@
 #include <list>
 #include <sstream>
 #include <vector>
+#include <GLUT\GL\SOIL.h>
+#include "GL.h"
 
 using namespace std;
 
@@ -95,6 +97,8 @@ public:
     vector<Vector3> parameterSpaces;
     
     vector<Object> objects;
+
+	GLuint* texture;
 };
 
 class ObjReader
