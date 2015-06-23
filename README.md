@@ -15,4 +15,4 @@ Commands:
 - [space bar] = enable auto rotate camera
 - ['] = (single quote) change current selected obj
 - [c] = change OBJ color to a random one
-- [m] = change how the OBJ is drawn (wireframe, polygons or both)
+- [m] = change how the OBJ is drawn (wireframe, polygons, both, difuse, textured)
