@@ -31,6 +31,9 @@ void ObjRenderer::Draw(Point p_where, Vector3 p_rotation)
 					__y =  (__point.y);
 					__z = (__point.z);
 
+					if (_parent->textureCoordinates.size() > 0)
+						glTexCoord2f(_parent->textureCoordinates[__toDraw->textureCoordinate].x, _parent->textureCoordinates[__toDraw->textureCoordinate].y);
+
 					glVertex3f(__x, __y, __z);
                     glNormal3f(__normal.x, __normal.y, __normal.z);
                 }
@@ -84,7 +87,16 @@ void ObjRenderer::Draw(Point p_where, Vector3 p_rotation)
 			}
 			else if (this->_drawType == TEXTURED)
 			{
+				if (this->_parent->texture != NULL)
+				{
+					glEnable(GL_TEXTURE_2D);
 
+					glBindTexture(GL_TEXTURE_2D, *this->_parent->texture);
+					glBegin(GL_POLYGON);
+					__drawPointsAction();
+					glEnd();
+					glDisable(GL_TEXTURE_2D);
+				}
 			}
 			else
             {

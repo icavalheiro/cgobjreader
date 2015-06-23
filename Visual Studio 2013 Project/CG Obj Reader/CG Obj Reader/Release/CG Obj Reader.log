@@ -1,17 +1,9 @@
-﻿Build started 22/06/2015 16:36:58.
-     1>Project "C:\Users\ivan.cavalheiro\Documents\GitHub\cgobjreader\Visual Studio 2013 Project\CG Obj Reader\CG Obj Reader\CG Obj Reader.vcxproj" on node 2 (Build target(s)).
+﻿Build started 22/06/2015 21:56:35.
+     1>Project "C:\Users\Ivan\Documents\GitHub\cgobjreader\Visual Studio 2013 Project\CG Obj Reader\CG Obj Reader\CG Obj Reader.vcxproj" on node 2 (Build target(s)).
      1>Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\ivan.cavalheiro\Documents\GitHub\cgobjreader\Visual Studio 2013 Project\CG Obj Reader\Release\CG Obj Reader.exe" /INCREMENTAL /NOLOGO /LIBPATH:..\GLUT\lib Glut32.lib libSOIL.a kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\ivan.cavalheiro\Documents\GitHub\cgobjreader\Visual Studio 2013 Project\CG Obj Reader\Release\CG Obj Reader.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\ivan.cavalheiro\Documents\GitHub\cgobjreader\Visual Studio 2013 Project\CG Obj Reader\Release\CG Obj Reader.lib" /MACHINE:X86 /SAFESEH Release\GL.obj
-         Release\main.obj
-         Release\ObjReader.obj
-         Release\ObjRenderer.obj
-         Release\ObjWriter.obj
-     1>LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/LTCG' specification
-     1>libSOIL.a(stb_image_aug.o) : error LNK2001: unresolved external symbol __alloca
-     1>libSOIL.a(image_helper.o) : error LNK2001: unresolved external symbol _sqrtf
-     1>C:\Users\ivan.cavalheiro\Documents\GitHub\cgobjreader\Visual Studio 2013 Project\CG Obj Reader\Release\CG Obj Reader.exe : fatal error LNK1120: 2 unresolved externals
-     1>Done Building Project "C:\Users\ivan.cavalheiro\Documents\GitHub\cgobjreader\Visual Studio 2013 Project\CG Obj Reader\CG Obj Reader\CG Obj Reader.vcxproj" (Build target(s)) -- FAILED.
+         CG Obj Reader.vcxproj -> C:\Users\Ivan\Documents\GitHub\cgobjreader\Visual Studio 2013 Project\CG Obj Reader\Release\CG Obj Reader.exe
+     1>Done Building Project "C:\Users\Ivan\Documents\GitHub\cgobjreader\Visual Studio 2013 Project\CG Obj Reader\CG Obj Reader\CG Obj Reader.vcxproj" (Build target(s)).
 
-Build FAILED.
+Build succeeded.
 
-Time Elapsed 00:00:00.37
+Time Elapsed 00:00:00.04

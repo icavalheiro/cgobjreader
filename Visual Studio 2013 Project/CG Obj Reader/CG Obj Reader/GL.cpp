@@ -140,6 +140,7 @@ void GL::Init(int *p_argc, char **p_argv)
     glClearColor(0,0,0,1);
 
 
+	/*
 	GLfloat posicao_luz0[] = { 0.0, 10.0, 0.0, 1.0 };
 	GLfloat cor_luz0[] = { 1.0, 1.0, 1.0, 1.0 };
 	GLfloat cor_luz0_amb[] = { 0.3, 0.3, 0.3, 1.0 };
@@ -157,7 +158,7 @@ void GL::Init(int *p_argc, char **p_argv)
 	glLightfv(GL_LIGHT1, GL_SPECULAR, cor_luz1);
 	glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, spot_luz1);
 	glLightfv(GL_LIGHT1, GL_POSITION, posicao_luz1);
-	glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, direcao_luz1);
+	glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, direcao_luz1);*/
 
 	//glEnable(GL_LIGHTING);
 //	glEnable(GL_LIGHT0);
