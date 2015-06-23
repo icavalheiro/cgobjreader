@@ -24,7 +24,6 @@ vector<string> objReader_split_string(string p_str, char p_delimiter)
 
 ObjFile* ObjReader::ReadFile(string p_fileName)
 {
-    ifstream __fileStream(p_fileName);
     string __line;
     ObjFile* __toReturn = new ObjFile();
     Object* __currentObject = NULL;
@@ -32,31 +31,99 @@ ObjFile* ObjReader::ReadFile(string p_fileName)
 
 	//read texure
 	{
-		ifstream __testForTexture(p_fileName + ".jpg");
+		string __textureName = p_fileName + ".jpg";
+		cout << "Trying to find texture " << __textureName << endl;
+		ifstream __testForTexture(__textureName);
 		if (__testForTexture.is_open() == true)
 		{
 			__testForTexture.close();
-
+			cout << "Texture found, loading it..." << endl;
 			//read texture
 
 			//http://www.lonesock.net/soil.html
 			//https://open.gl/textures
-			GLuint __texture = SOIL_load_OGL_texture(
-				(p_fileName + ".jpg").c_str(), 
-				SOIL_LOAD_AUTO, 
-				SOIL_CREATE_NEW_ID, 
-				SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
+			try
+			{
 
-			__toReturn->texture = &__texture;
+				GLuint __texture;
+				glGenTextures(1, &__texture);
+				glBindTexture(GL_TEXTURE_2D, __texture);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+				int width, height;
+				unsigned char* image = SOIL_load_image(__textureName.c_str(), &width, &height, 0, SOIL_LOAD_RGB);
+				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+				free(image);
+				
+				__toReturn->texture = &__texture;
+				glBindTexture(GL_TEXTURE_2D, 0);
+
+				/*GLuint __texture = SOIL_load_OGL_texture(
+				(__textureName).c_str(),
+					SOIL_LOAD_AUTO,
+					SOIL_CREATE_NEW_ID,
+					SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_MULTIPLY_ALPHA);
+
+				//if (__texture == 0)
+				//	cout << "\nError: " << SOIL_last_result() << endl;
+
+				//__toReturn->texture = &__texture;*/
+			}
+			catch (exception e)
+			{
+				cout << "\nError:" << e.what() << endl;
+			}
+
+			/*
+			
+			GLuint __texture;
+	unsigned char * data;
+	FILE * file;
+
+	file = fopen(filename, "rb");
+	if (file == NULL) exit(1);
+	data = (unsigned char *)malloc(width * height * 3);
+	fread(data, width * height * 3, 1, file);
+	fclose(file);
+
+	glGenTextures(1, &__texture);
+	glBindTexture(GL_TEXTURE_2D, __texture);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE,
+		GL_MODULATE);
+
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
+		GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
+		GL_LINEAR);
+
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S,
+		GL_REPEAT);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T,
+		GL_REPEAT);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0,
+		GL_RGB, GL_UNSIGNED_BYTE, data);
+	free(data);
+	textura =  __texture;
+			*/
+
 		}
 		else
 		{
+			cout << "Texture not found." << endl;
 			__testForTexture.close();
 		}
+
+		cout << endl;
 	}
 
 
 	//read .obj
+	ifstream __fileStream(p_fileName);
     if(__fileStream.is_open())
     {
         vector<Vector3> __points;

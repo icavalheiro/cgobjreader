@@ -31,7 +31,7 @@ void ObjRenderer::Draw(Point p_where, Vector3 p_rotation)
 					__y =  (__point.y);
 					__z = (__point.z);
 
-					if (_parent->textureCoordinates.size() > 0)
+					//if (_parent->texture != NULL)
 						glTexCoord2f(_parent->textureCoordinates[__toDraw->textureCoordinate].x, _parent->textureCoordinates[__toDraw->textureCoordinate].y);
 
 					glVertex3f(__x, __y, __z);
